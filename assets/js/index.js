@@ -23,19 +23,20 @@ function getUserInfo() {
             if (res.code !== 0) {
                 return layui.layer.msg('获取用户信息失败！')
             }
-            layui.layer.msg('获取用户信息成功')
-            console.log(res);
+            // layui.layer.msg('获取用户信息成功')
+            // console.log(res);
             renderAvatar(res.data)
         },
-        // complete: function(res) {
-        //     console.log(res.responseJSON);
-        //     if (res.responseJSON.code === 1) {
-        //         localStorage.removeItem("token")
-        //         location.href = "/login.html"
-        //     }
-        // }
+        complete: function(res) {
+            console.log(res.responseJSON);
+            if (res.responseJSON.code === 1) {
+                localStorage.removeItem("token")
+                location.href = "/login.html"
+            }
+        }
     })
 }
+
 
 function renderAvatar(user) {
     var name = user.nickname || user.username

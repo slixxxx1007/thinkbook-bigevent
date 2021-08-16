@@ -7,9 +7,10 @@ $.ajaxPrefilter(function(options) {
             Authorization: localStorage.getItem("token") || ""
         }
     };
+    // 无论请求成功与否，都会执行的回调函数
     options.complete = function(res) {
-        console.log(res.responseJSON);
-        if (res.responseJSON.code === 1) {
+        // console.log(res.responseJSON);
+        if (res.responseJSON.code === 1 && res.responseJSON.message === '身份认证失败！') {
             localStorage.removeItem("token")
             location.href = "/login.html"
         }
